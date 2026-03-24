@@ -12,11 +12,11 @@ const uatConfig = {
   },
 
   database: {
-    host: process.env.LOCAL_DATABASE_HOST || "",
-    port: Number(process.env.LOCAL_DATABASE_PORT || "5432"),
-    user: process.env.LOCAL_DATABASE_USER || "postgres",
-    password: process.env.LOCAL_DATABASE_PASSWORD || "postgres",
-    name: process.env.LOCAL_DATABASE_NAME || "",
+    host: process.env.DATABASE_HOST || "",
+    port: Number(process.env.DATABASE_PORT || "5432"),
+    user: process.env.DATABASE_USER || "postgres",
+    password: process.env.DATABASE_PASSWORD || "postgres",
+    name: process.env.DATABASE_NAME || "",
     ssl: true,
   },
 

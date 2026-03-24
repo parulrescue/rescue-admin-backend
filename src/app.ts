@@ -136,6 +136,11 @@ export async function buildApp() {
     app.register(dbPlugin);
     app.register(errorPlugin);
 
+    // Health check
+    app.get("/", async (_request, reply) => {
+        return reply.send({ status: "ok", message: "Animal Rescue API is running" });
+    });
+
     // API routes — /api/v1 prefix
     app.register(authRoutes, { prefix: "/api/v1/auth" });
     app.register(userRoutes, { prefix: "/api/v1/users" });
@@ -147,6 +152,18 @@ export async function buildApp() {
     app.register(ledgerRoutes, { prefix: "/api/v1/ledger" });
     app.register(dashboardRoutes, { prefix: "/api/v1/dashboard" });
     app.register(logExportRoutes, { prefix: "/api/logs" });
+
+    // Keep-alive ping every 15 seconds to prevent Render cold starts
+    setInterval(() => {
+        (async () => {
+            try {
+                const res = await fetch("https://rescue-backend-b4uz.onrender.com/");
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    }, 15000);
 
     return app;
 }
