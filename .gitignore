@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# logs
+*.log
+
+# env files
+.env
+.env.*.local
+
+# drizzle migrations are usually committed; keep generated meta/caches out if any
+.drizzle/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

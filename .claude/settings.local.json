@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint:types:*)",
+      "Bash(npm run build:*)",
+      "Bash(node:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd //c \"taskkill /PID 135364 /F\")",
+      "Bash(cmd //c \"del /s /q E:\\\\backend\\\\src\\\\*.js\")",
+      "Bash(del \"e:\\\\backend\\\\src\\\\db\\\\models\\\\logs\\\\log-filter-history.model.ts\")"
+    ]
+  }
+}
