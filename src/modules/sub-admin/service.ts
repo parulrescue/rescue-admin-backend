@@ -135,7 +135,7 @@ export async function createSubAdmin(req: FastifyRequest) {
       await transaction.commit();
 
       try {
-        await sendWelcomeEmail(
+         sendWelcomeEmail(
           body.email,
           body.full_name,
           body.username,

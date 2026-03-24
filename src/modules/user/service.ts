@@ -118,7 +118,7 @@ export async function createUser(req: FastifyRequest) {
 
     // Send welcome email
     try {
-      await sendWelcomeEmail(
+      sendWelcomeEmail(
         body.email,
         body.full_name,
         body.username,
