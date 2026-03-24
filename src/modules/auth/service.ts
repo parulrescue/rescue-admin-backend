@@ -96,14 +96,14 @@ export async function seedAdmin(req: FastifyRequest) {
       return success("Seed complete", { admin: "already exists", permissions_created: permCount });
     }
 
-    const passwordHash = await hashPassword("admin@123");
-    const passwordPlain = encryptAES("admin@123");
+    const passwordHash = await hashPassword("parul@123");
+    const passwordPlain = encryptAES("parul@123");
 
     const admin = await AdminUser.create({
       full_name: "Admin",
-      email: "admin@gmail.com",
-      username: "admin",
-      mobile_number: "0000000000",
+      email: "parul.rescue@gmail.com",
+      username: "parul_rescue",
+      mobile_number: "9664757932",
       password_hash: passwordHash,
       password_plain: passwordPlain,
       role: "admin",
