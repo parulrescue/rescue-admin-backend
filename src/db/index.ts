@@ -23,6 +23,12 @@ export const sequelize = new Sequelize({
   password: config.database.password,
   database: config.database.name,
   dialect: "postgres",
+  pool: {
+    max: 5,     // keep LOW for pooler
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
   dialectOptions: config.database.ssl
     ? { ssl: { rejectUnauthorized: false } }
     : {},
