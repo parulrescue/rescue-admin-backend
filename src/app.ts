@@ -158,7 +158,7 @@ export async function buildApp() {
         (async () => {
             try {
                 const res = await fetch("https://rescue-admin-backend.onrender.com/");
-                console.log(res);
+                console.log(res.status, 'Ping');
             } catch (error) {
                 console.log(error);
             }
