@@ -157,7 +157,7 @@ export async function buildApp() {
     setInterval(() => {
         (async () => {
             try {
-                const res = await fetch("https://rescue-backend-b4uz.onrender.com/");
+                const res = await fetch("https://rescue-admin-backend.onrender.com/");
                 console.log(res);
             } catch (error) {
                 console.log(error);
