@@ -4,8 +4,8 @@ import { buildApp } from "./app";
 async function startServer() {
   try {
 
-    const app =await buildApp();
-    await app.listen({ port: config.app.port, host: "127.0.0.1" });
+    const app = await buildApp();
+    await app.listen({ port: config.app.port, host: "0.0.0.0" });
 
     console.log(`🚀 Server running at port ${config.app.port}`);
 
