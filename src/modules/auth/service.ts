@@ -179,6 +179,7 @@ export async function loginAdmin(req: FastifyRequest) {
       expiresAt,
     });
   } catch (err: any) {
+    console.log(err, 'err')
     return error(HttpStatus.INTERNAL_SERVER_ERROR, "Login failed");
   }
 }
