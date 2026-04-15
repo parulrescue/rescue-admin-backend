@@ -42,10 +42,6 @@ const localConfig = {
     from: process.env.SMTP_FROM || "Animal Rescue <noreply@example.com>",
   },
 
-  upload: {
-    dir: process.env.UPLOAD_DIR || "./uploads",
-  },
-
   cors: {
     adminFrontendUrl: process.env.ADMIN_FRONTEND_URL || "http://localhost:5175",
     frontendUrl: process.env.FRONTEND_URL || "http://localhost:5174",

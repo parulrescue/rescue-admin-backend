@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const AppEnvSchema = z.enum(["local", "uat", "prod"]);
+export const AppEnvSchema = z.enum(["local", "prod"]);
 
 export const ConfigSchema = z.object({
     app: z.object({
@@ -40,10 +40,6 @@ export const ConfigSchema = z.object({
         user: z.string().min(1),
         pass: z.string().min(1),
         from: z.string().min(1),
-    }),
-
-    upload: z.object({
-        dir: z.string().min(1),
     }),
 
     cors: z.object({

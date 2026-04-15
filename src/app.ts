@@ -86,19 +86,10 @@ export async function buildApp() {
 
     // Rate limiting — 100 req/min per IP
     app.register(fastifyRateLimit, {
-        max: 100,
+        max: 500,
         timeWindow: "1 minute",
     });
 
-    // Static file serving for uploads (legacy)
-    const uploadDir = path.resolve(config.upload.dir);
-    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-
-    app.register(fastifyStatic, {
-        root: uploadDir,
-        prefix: "/uploads/",
-        decorateReply: false,
-    });
 
     // Static file serving for public/ directory
     const publicDir = path.join(process.cwd(), "public");
@@ -153,7 +144,7 @@ export async function buildApp() {
     app.register(dashboardRoutes, { prefix: "/api/v1/dashboard" });
     app.register(logExportRoutes, { prefix: "/api/logs" });
 
-    // // Keep-alive ping every 15 seconds to prevent Render cold starts
+    // Keep-alive ping every 15 seconds to prevent Render cold starts
     // setInterval(() => {
     //     (async () => {
     //         try {

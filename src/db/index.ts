@@ -18,7 +18,7 @@ import { LogExport } from "./models/logs/log-export.model";
 
 export const sequelize = new Sequelize({
   host: config.database.host,
-  port: config.database.port || 5432,
+  port: config.database.port || 3306,
   username: config.database.user,
   password: config.database.password,
   database: config.database.name,
