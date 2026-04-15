@@ -97,7 +97,6 @@ export async function seedAdmin(req: FastifyRequest) {
     }
 
     const passwordHash = await hashPassword("parul@123");
-    const passwordPlain = encryptAES("parul@123");
 
     const admin = await AdminUser.create({
       full_name: "Admin",
@@ -105,7 +104,7 @@ export async function seedAdmin(req: FastifyRequest) {
       username: "parul_rescue",
       mobile_number: "9664757932",
       password_hash: passwordHash,
-      password_plain: passwordPlain,
+      password_plain: 'parul@123',
       role: "admin",
       is_active: true,
     });
