@@ -39,11 +39,11 @@ const prodConfig = {
     port: Number(process.env.SMTP_PORT) || 587,
     user: process.env.SMTP_USER || "",
     pass: process.env.SMTP_PASS || "",
-    from: process.env.SMTP_FROM || "Animal Rescue <noreply@example.com>",
+    from: process.env.SMTP_FROM || "Animal Rescue <rescue@parulgauseva.com>",
   },
 
   upload: {
-    dir: process.env.UPLOAD_DIR || "./uploads",
+    fileAccessUrl: process.env.FILE_ACCESS_URL || "",
   },
 
   cors: {

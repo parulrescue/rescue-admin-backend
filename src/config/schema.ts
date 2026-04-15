@@ -42,6 +42,10 @@ export const ConfigSchema = z.object({
         from: z.string().min(1),
     }),
 
+    upload: z.object({
+        fileAccessUrl: z.string().min(1),
+    }),
+
     cors: z.object({
         adminFrontendUrl: z.string().min(1),
         frontendUrl: z.string().min(1),
