@@ -12,11 +12,11 @@ const prodConfig = {
   },
 
   database: {
-    host: process.env.PROD_DATABASE_HOST || "",
-    port: Number(process.env.PROD_DATABASE_PORT || "5432"),
-    user: process.env.PROD_DATABASE_USER || "postgres",
-    password: process.env.PROD_DATABASE_PASSWORD || "postgres",
-    name: process.env.PROD_DATABASE_NAME || "",
+    host: process.env.DATABASE_HOST || "",
+    port: Number(process.env.DATABASE_PORT || ""),
+    user: process.env.DATABASE_USER || "",
+    password: process.env.DATABASE_PASSWORD || "",
+    name: process.env.DATABASE_NAME || "",
     ssl: true,
   },
 
@@ -28,7 +28,7 @@ const prodConfig = {
   },
 
   security: {
-    jwtSecret: process.env.JWT_SECRET || "admin-jwt",
+    jwtSecret: process.env.JWT_SECRET || "",
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || "48h",
     bcryptSaltRounds: Number(process.env.BCRYPT_ROUNDS) || 12,
     aesSecretKey: process.env.AES_SECRET_KEY || "",

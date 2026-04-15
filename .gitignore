@@ -10,6 +10,8 @@ dist/
 # env files
 .env
 .env.*.local
+.env.local
+.env.prod
 
 # drizzle migrations are usually committed; keep generated meta/caches out if any
 .drizzle/
