@@ -4,7 +4,7 @@
     "lib": ["ES2022"],
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
@@ -16,5 +16,8 @@
     "types": ["node"],
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "server.ts",
+    "src/**/*.ts"
+  ]
 }

@@ -26,7 +26,7 @@ export class LogExport extends Model<LogExport> {
   @Column({ type: DataType.TEXT, allowNull: true, field: "file_path" })
   file_path?: string | null;
 
-  @Column({ type: DataType.JSONB, allowNull: true })
+  @Column({ type: DataType.JSON, allowNull: true })
   filters?: {
     level?: string;
     startTime?: string;

@@ -1,5 +1,5 @@
-import { config } from "./config";
-import { buildApp } from "./app";
+import { config } from "./src/config";
+import { buildApp } from "./src/app";
 
 async function startServer() {
   try {

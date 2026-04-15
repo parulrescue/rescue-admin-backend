@@ -22,7 +22,7 @@ export const sequelize = new Sequelize({
   username: config.database.user,
   password: config.database.password,
   database: config.database.name,
-  dialect: "postgres",
+  dialect: "mysql",
   pool: {
     max: 5,     // keep LOW for pooler
     min: 0,
