@@ -90,7 +90,7 @@ const deleteLedgerEntryHandler = async (req: FastifyRequest, res: FastifyReply) 
 export const ledgerRoutes: FastifyPluginAsync = async (app) => {
   app.get("/", { preHandler: [authenticate, requireAdmin, validate(ListQuerySchema, "query")] }, listLedgerEntriesHandler);
   app.get("/summary", { preHandler: [authenticate, requireAdmin] }, getLedgerSummaryHandler);
-  app.post("/", { preHandler: [authenticate, requireAdmin, validate(CreateLedgerSchema)] }, createLedgerEntryHandler);
-  app.put("/:id", { preHandler: [authenticate, requireAdmin, validate(IdParamSchema, "params"), validate(UpdateLedgerSchema)] }, updateLedgerEntryHandler);
+  app.post("/", { preHandler: [authenticate, requireAdmin] }, createLedgerEntryHandler);
+  app.put("/:id", { preHandler: [authenticate, requireAdmin, validate(IdParamSchema, "params")] }, updateLedgerEntryHandler);
   app.delete("/:id", { preHandler: [authenticate, requireAdmin, validate(IdParamSchema, "params")] }, deleteLedgerEntryHandler);
 };

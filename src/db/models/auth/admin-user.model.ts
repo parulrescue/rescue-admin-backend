@@ -10,13 +10,13 @@ export class AdminUser extends Model {
   @Column({ type: DataType.STRING(150), allowNull: false })
   full_name!: string;
 
-  @Column({ type: DataType.STRING(15), allowNull: false, unique: true })
+  @Column({ type: DataType.STRING(15), allowNull: false })
   mobile_number!: string;
 
-  @Column({ type: DataType.STRING(50), allowNull: false, unique: true })
+  @Column({ type: DataType.STRING(50), allowNull: false })
   username!: string;
 
-  @Column({ type: DataType.STRING(191), allowNull: false, unique: true })
+  @Column({ type: DataType.STRING(191), allowNull: false })
   email!: string;
 
   @Column({ type: DataType.STRING(255), allowNull: false })

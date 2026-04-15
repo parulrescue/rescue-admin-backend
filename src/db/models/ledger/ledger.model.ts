@@ -21,6 +21,9 @@ export class Ledger extends Model {
   @Column({ type: DataType.STRING(100), allowNull: true })
   reference_id!: string | null;
 
+  @Column({ type: DataType.STRING(500), allowNull: true })
+  photo_url!: string | null;
+
   @ForeignKey(() => AdminUser)
   @Column({ type: DataType.INTEGER, allowNull: false })
   created_by!: number;
