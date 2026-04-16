@@ -205,7 +205,7 @@ export async function updateLedgerEntry(req: FastifyRequest) {
     };
     if (newPhotoUrl !== undefined) {
       if (entry.photo_url) deleteFile(entry.photo_url);
-      updateData.photo_url = newPhotoUrl;
+      updateData.photo_url = `${config.upload.fileAccessUrl}${newPhotoUrl}`;
     } else if (removePhoto) {
       if (entry.photo_url) deleteFile(entry.photo_url);
       updateData.photo_url = null;
