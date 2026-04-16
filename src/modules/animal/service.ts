@@ -10,7 +10,7 @@ export async function listAnimals(req: FastifyRequest) {
     const { search, page, limit } = req.query as { search?: string; page?: number; limit?: number };
     const where: any = {};
     if (search) {
-      where.name = { [Op.iLike]: `%${search}%` };
+      where.name = { [Op.like]: `%${search}%` };
     }
 
     if (page && limit) {
@@ -44,12 +44,13 @@ export async function createAnimal(req: FastifyRequest) {
   try {
     const { name } = req.body as { name: string };
 
-    const existing = await Animal.findOne({ where: { name: { [Op.iLike]: name } } });
+    const existing = await Animal.findOne({ where: { name: { [Op.like]: name } } });
     if (existing) return error(HttpStatus.CONFLICT, "Animal with this name already exists");
 
     const animal = await Animal.create({ name, is_active: true });
     return success("Animal created", animal, HttpStatus.CREATED);
   } catch (err: any) {
+    console.log(err)
     return error(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create animal");
   }
 }
@@ -63,7 +64,7 @@ export async function updateAnimal(req: FastifyRequest) {
     if (!animal) return error(HttpStatus.NOT_FOUND, "Animal not found");
 
     if (name && name?.toLowerCase() !== animal?.name?.toLowerCase()) {
-      const dup = await Animal.findOne({ where: { name: { [Op.iLike]: name }, id: { [Op.ne]: id } } });
+      const dup = await Animal.findOne({ where: { name: { [Op.like]: name }, id: { [Op.ne]: id } } });
       if (dup) return error(HttpStatus.CONFLICT, "Animal with this name already exists");
     }
 

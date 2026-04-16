@@ -26,10 +26,10 @@ export async function listUsers(req: FastifyRequest) {
     const where: any = {};
     if (search) {
       where[Op.or] = [
-        { full_name: { [Op.iLike]: `%${search}%` } },
-        { username: { [Op.iLike]: `%${search}%` } },
-        { email: { [Op.iLike]: `%${search}%` } },
-        { mobile_number: { [Op.iLike]: `%${search}%` } },
+        { full_name: { [Op.like]: `%${search}%` } },
+        { username: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } },
+        { mobile_number: { [Op.like]: `%${search}%` } },
       ];
     }
 

@@ -17,13 +17,13 @@ export async function listRescues(req: FastifyRequest) {
 
     const where: any = {};
     if (status) where.status = status;
-    if (animal_type) where.animal_type = { [Op.iLike]: `%${animal_type}%` };
+    if (animal_type) where.animal_type = { [Op.like]: `%${animal_type}%` };
     if (search) {
       where[Op.or] = [
-        { animal_type: { [Op.iLike]: `%${search}%` } },
-        { info_provider_name: { [Op.iLike]: `%${search}%` } },
-        { from_address: { [Op.iLike]: `%${search}%` } },
-        { to_address: { [Op.iLike]: `%${search}%` } },
+        { animal_type: { [Op.like]: `%${search}%` } },
+        { info_provider_name: { [Op.like]: `%${search}%` } },
+        { from_address: { [Op.like]: `%${search}%` } },
+        { to_address: { [Op.like]: `%${search}%` } },
       ];
     }
     if (date_from || date_to) {

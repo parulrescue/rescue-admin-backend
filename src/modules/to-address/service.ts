@@ -13,9 +13,9 @@ export async function listToAddresses(req: FastifyRequest) {
     const where: any = {};
     if (search) {
       where[Op.or] = [
-        { title: { [Op.iLike]: `%${search}%` } },
-        { address: { [Op.iLike]: `%${search}%` } },
-        { area: { [Op.iLike]: `%${search}%` } },
+        { title: { [Op.like]: `%${search}%` } },
+        { address: { [Op.like]: `%${search}%` } },
+        { area: { [Op.like]: `%${search}%` } },
       ];
     }
 

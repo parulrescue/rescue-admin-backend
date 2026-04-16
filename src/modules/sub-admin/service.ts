@@ -33,9 +33,9 @@ export async function listSubAdmins(req: FastifyRequest) {
     const where: any = { role: "sub_admin" };
     if (search) {
       where[Op.or] = [
-        { full_name: { [Op.iLike]: `%${search}%` } },
-        { username: { [Op.iLike]: `%${search}%` } },
-        { email: { [Op.iLike]: `%${search}%` } },
+        { full_name: { [Op.like]: `%${search}%` } },
+        { username: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } },
       ];
     }
 

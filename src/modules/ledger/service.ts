@@ -42,12 +42,12 @@ export async function listLedgerEntries(req: FastifyRequest) {
     if (type) where.type = type;
     if (search) {
       where[Op.or] = [
-        { description: { [Op.iLike]: `%${search}%` } },
-        { category: { [Op.iLike]: `%${search}%` } },
-        { reference_id: { [Op.iLike]: `%${search}%` } },
+        { description: { [Op.like]: `%${search}%` } },
+        { category: { [Op.like]: `%${search}%` } },
+        { reference_id: { [Op.like]: `%${search}%` } },
       ];
     }
-    if (category) where.category = { [Op.iLike]: `%${category}%` };
+    if (category) where.category = { [Op.like]: `%${category}%` };
     if (date_from || date_to) {
       where.createdAt = {};
       if (date_from) where.createdAt[Op.gte] = new Date(date_from);
