@@ -35,6 +35,11 @@ const DEFAULT_PERMISSIONS = [
   { key: "animal_create", module: "animal", description: "Create new animals" },
   { key: "animal_update", module: "animal", description: "Edit animals" },
   { key: "animal_delete", module: "animal", description: "Delete animals" },
+  // Ledger management
+  { key: "ledger_view", module: "ledger", description: "View ledger entries" },
+  { key: "ledger_create", module: "ledger", description: "Create ledger entries" },
+  { key: "ledger_update", module: "ledger", description: "Edit ledger entries" },
+  { key: "ledger_delete", module: "ledger", description: "Delete ledger entries" },
 ];
 
 // Old keys that may exist in DB → correct key

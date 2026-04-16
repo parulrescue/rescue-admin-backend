@@ -5,7 +5,7 @@ import { validate } from "../../shared/http/validate";
 import { HttpStatus } from "../../shared/http/status";
 import { serverError } from "../../shared/http/response";
 import { authenticate } from "../../plugins/auth.plugin";
-import { requireAdmin } from "../../plugins/permission.plugin";
+import { requirePermission } from "../../plugins/permission.plugin";
 
 const ListQuerySchema = z.object({
   page: z.string().default("1").transform(Number),
@@ -88,9 +88,9 @@ const deleteLedgerEntryHandler = async (req: FastifyRequest, res: FastifyReply) 
 };
 
 export const ledgerRoutes: FastifyPluginAsync = async (app) => {
-  app.get("/", { preHandler: [authenticate, requireAdmin, validate(ListQuerySchema, "query")] }, listLedgerEntriesHandler);
-  app.get("/summary", { preHandler: [authenticate, requireAdmin] }, getLedgerSummaryHandler);
-  app.post("/", { preHandler: [authenticate, requireAdmin] }, createLedgerEntryHandler);
-  app.put("/:id", { preHandler: [authenticate, requireAdmin, validate(IdParamSchema, "params")] }, updateLedgerEntryHandler);
-  app.delete("/:id", { preHandler: [authenticate, requireAdmin, validate(IdParamSchema, "params")] }, deleteLedgerEntryHandler);
+  app.get("/", { preHandler: [authenticate, requirePermission("ledger_view"), validate(ListQuerySchema, "query")] }, listLedgerEntriesHandler);
+  app.get("/summary", { preHandler: [authenticate, requirePermission("ledger_view")] }, getLedgerSummaryHandler);
+  app.post("/", { preHandler: [authenticate, requirePermission("ledger_create")] }, createLedgerEntryHandler);
+  app.put("/:id", { preHandler: [authenticate, requirePermission("ledger_update"), validate(IdParamSchema, "params")] }, updateLedgerEntryHandler);
+  app.delete("/:id", { preHandler: [authenticate, requirePermission("ledger_delete"), validate(IdParamSchema, "params")] }, deleteLedgerEntryHandler);
 };
