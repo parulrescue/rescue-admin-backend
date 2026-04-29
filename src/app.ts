@@ -71,14 +71,14 @@ export async function buildApp() {
     // });
 
     app.register(fastifyCors, {
-    origin: '*',
-    credentials: false,
-});
+        origin: ['https://admin.parulgauseva.com', 'https://parulgauseva.com'],
+        // credentials: false,
+    });
 
     // Helmet — security headers
     app.register(fastifyHelmet, {
         contentSecurityPolicy: false,
-        // crossOriginResourcePolicy: { policy: "cross-origin" },
+        crossOriginResourcePolicy: { policy: "cross-origin" },
     });
 
     // Multipart — file uploads
