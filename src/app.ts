@@ -78,7 +78,7 @@ export async function buildApp() {
     // Helmet — security headers
     app.register(fastifyHelmet, {
         contentSecurityPolicy: false,
-        crossOriginResourcePolicy: { policy: "cross-origin" },
+        // crossOriginResourcePolicy: { policy: "cross-origin" },
     });
 
     // Multipart — file uploads
