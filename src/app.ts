@@ -65,11 +65,15 @@ export async function buildApp() {
     });
 
     // CORS — whitelist admin frontend + user frontend URLs
+    // app.register(fastifyCors, {
+    //     // origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
+    //     credentials: true,
+    // });
+
     app.register(fastifyCors, {
-        // origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
-        origin: ['*'],
-        credentials: true,
-    });
+    origin: '*',
+    credentials: false,
+});
 
     // Helmet — security headers
     app.register(fastifyHelmet, {
