@@ -66,7 +66,8 @@ export async function buildApp() {
 
     // CORS — whitelist admin frontend + user frontend URLs
     app.register(fastifyCors, {
-        origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
+        // origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
+        origin: ['*'],
         credentials: true,
     });
 
