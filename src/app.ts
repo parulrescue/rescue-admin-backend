@@ -65,14 +65,9 @@ export async function buildApp() {
     });
 
     // CORS — whitelist admin frontend + user frontend URLs
-    // app.register(fastifyCors, {
-    //     // origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
-    //     credentials: true,
-    // });
-
     app.register(fastifyCors, {
-        origin: ['https://admin.parulgauseva.com', 'https://parulgauseva.com'],
-        // credentials: false,
+        origin: [config.cors.adminFrontendUrl, config.cors.frontendUrl],
+        credentials: true,
     });
 
     // Helmet — security headers
