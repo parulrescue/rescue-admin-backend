@@ -10,7 +10,7 @@ async function syncDatabase() {
     // await sequelize.sync({ alter: true });
     console.log("✅ Database synced successfully");
 
-    await sequelize.close();
+    // await sequelize.close();
   } catch (err) {
     console.error("❌ Database sync failed", err);
     process.exit(1);
