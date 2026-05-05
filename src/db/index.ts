@@ -45,7 +45,7 @@ export async function initDb() {
   try {
     await sequelize.authenticate();
     console.log("Database connected successfully");
-    await sequelize.sync({ alter: true });
+    // await sequelize.sync({ alter: true });
     console.log("Database synced with models");
   } catch (err) {
     console.error("Database connection failed", err);
