@@ -70,7 +70,7 @@ export async function uploadSingleFile(
   const ext = path.extname(file.filename) || ".jpg";
   const fileName = `${prefix}_${Date.now()}${ext}`;
   const fullPath = path.join(uploadDir, fileName);
-  const url = `${config.upload.fileAccessUrl}/public/${subDir}/${fileName}`;
+  const url = `${config.upload.fileAccessUrl}/api/file/${subDir}/${fileName}`;
 
   const writeStream = fs.createWriteStream(fullPath);
   let size = 0;

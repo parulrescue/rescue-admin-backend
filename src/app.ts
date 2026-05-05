@@ -95,6 +95,16 @@ export async function buildApp() {
     const publicDir = path.join(process.cwd(), "public");
     if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
 
+    // Primary file access route — DB stores relative paths like "profile_pic/avatar.jpg"
+    // and clients build URLs as `${BASE_URL}/api/file/${path}`.
+    app.register(fastifyStatic, {
+        root: publicDir,
+        prefix: "/api/file/",
+        decorateReply: false,
+    });
+
+    // Legacy route — kept for backward compatibility with rows that still hold
+    // "/public/..." or full-URL values created before the path-only migration.
     app.register(fastifyStatic, {
         root: publicDir,
         prefix: "/public/",

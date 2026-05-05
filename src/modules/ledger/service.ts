@@ -7,7 +7,6 @@ import { HttpStatus } from "../../shared/http/status";
 import { getPagination, getPaginationMeta } from "../../shared/utils/pagination";
 import { sequelize } from "../../db";
 import { uploadMultipleFiles, UploadError, deleteFile } from "../../middleware/fileUpload";
-import { config } from "../../config";
 
 function isMultipart(req: FastifyRequest): boolean {
   const ct = req.headers["content-type"] || "";
@@ -136,15 +135,13 @@ export async function createLedgerEntry(req: FastifyRequest) {
       }
     }
 
-    console.log(photoUrl, 'photoUrl')
-
     const entry = await Ledger.create({
       type: body.type,
       amount: body.amount,
       category: body.category,
       description: body.description,
       reference_id: body.reference_id,
-      photo_url: `${config.upload.fileAccessUrl}${photoUrl}`,
+      photo_url: photoUrl,
       created_by: req.adminId!,
     });
 
@@ -205,7 +202,7 @@ export async function updateLedgerEntry(req: FastifyRequest) {
     };
     if (newPhotoUrl !== undefined) {
       if (entry.photo_url) deleteFile(entry.photo_url);
-      updateData.photo_url = `${config.upload.fileAccessUrl}${newPhotoUrl}`;
+      updateData.photo_url = newPhotoUrl;
     } else if (removePhoto) {
       if (entry.photo_url) deleteFile(entry.photo_url);
       updateData.photo_url = null;
