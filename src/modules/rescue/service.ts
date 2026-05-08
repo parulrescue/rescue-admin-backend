@@ -36,7 +36,7 @@ export async function listRescues(req: FastifyRequest) {
       where,
       include: [
         { model: RescueImage, as: "images", attributes: ["id", "image_url", "media_type"], separate: true, order: [["sort_order", "ASC"]], limit: 1 },
-        { model: RescuePerson, as: "rescue_persons", attributes: ["user_id"] },
+        { model: RescuePerson, as: "rescue_persons", attributes: ["user_id"], separate: true },
         { model: User, as: "creator", attributes: ["id", "full_name"] },
       ],
       attributes: ["id", "animal_type", "animal_description", "status", "info_provider_name", "info_provider_number", "from_address", "from_pincode", "from_area", "to_address", "to_pincode", "to_area", "createdAt"],
