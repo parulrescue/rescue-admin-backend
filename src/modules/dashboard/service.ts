@@ -15,7 +15,7 @@ export async function getDashboardStats(req: FastifyRequest) {
     const [totalUsers, totalRescues, todayRescues] = await Promise.all([
       User.count(),
       Rescue.count(),
-      Rescue.count({ where: { createdAt: { [Op.gte]: today } } }),
+      Rescue.count({ where: { rescue_date: { [Op.gte]: today } } }),
     ]);
 
     // Ledger balance
@@ -27,8 +27,8 @@ export async function getDashboardStats(req: FastifyRequest) {
 
     // Recent 5 rescues
     const recentRescues = await Rescue.findAll({
-      attributes: ["id", "animal_type", "status", "createdAt"],
-      order: [["createdAt", "DESC"]],
+      attributes: ["id", "animal_type", "status", "rescue_date"],
+      order: [["rescue_date", "DESC"]],
       limit: 5,
       raw: true,
     });

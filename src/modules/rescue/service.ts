@@ -27,9 +27,9 @@ export async function listRescues(req: FastifyRequest) {
       ];
     }
     if (date_from || date_to) {
-      where.createdAt = {};
-      if (date_from) where.createdAt[Op.gte] = new Date(date_from);
-      if (date_to) where.createdAt[Op.lte] = new Date(date_to + "T23:59:59.999Z");
+      where.rescue_date = {};
+      if (date_from) where.rescue_date[Op.gte] = new Date(date_from);
+      if (date_to) where.rescue_date[Op.lte] = new Date(date_to + "T23:59:59.999Z");
     }
 
     const { count, rows } = await Rescue.findAndCountAll({
@@ -39,7 +39,7 @@ export async function listRescues(req: FastifyRequest) {
         { model: RescuePerson, as: "rescue_persons", attributes: ["user_id"], separate: true },
         { model: User, as: "creator", attributes: ["id", "full_name"] },
       ],
-      attributes: ["id", "animal_type", "animal_description", "status", "info_provider_name", "info_provider_number", "from_address", "from_pincode", "from_area", "to_address", "to_pincode", "to_area", "createdAt"],
+      attributes: ["id", "animal_type", "animal_description", "status", "info_provider_name", "info_provider_number", "from_address", "from_pincode", "from_area", "to_address", "to_pincode", "to_area", "rescue_date"],
       offset,
       limit: take,
       order: [["id", "DESC"]],
@@ -108,19 +108,13 @@ export async function updateRescueFull(req: FastifyRequest) {
       if (fields.to_pincode !== undefined) updateData.to_pincode = fields.to_pincode || null;
       if (fields.to_area !== undefined) updateData.to_area = fields.to_area || null;
       if (fields.status) updateData.status = fields.status;
+      if (fields.rescue_date) {
+        const parsedDate = new Date(fields.rescue_date);
+        if (!isNaN(parsedDate.getTime())) updateData.rescue_date = parsedDate;
+      }
 
       if (Object.keys(updateData).length > 0) {
         await rescue.update(updateData, { transaction });
-      }
-
-      // createdAt is a Sequelize read-only attribute on existing records — instance.update()
-      // silently ignores it, so it must be set with { raw: true } to bypass that guard.
-      if (fields.createdAt) {
-        const parsedDate = new Date(fields.createdAt);
-        if (!isNaN(parsedDate.getTime())) {
-          rescue.set("createdAt", parsedDate, { raw: true });
-          await rescue.save({ transaction });
-        }
       }
 
       // Handle removed media: delete_media_ids is a JSON array of image IDs to remove
