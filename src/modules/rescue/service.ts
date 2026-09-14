@@ -108,13 +108,19 @@ export async function updateRescueFull(req: FastifyRequest) {
       if (fields.to_pincode !== undefined) updateData.to_pincode = fields.to_pincode || null;
       if (fields.to_area !== undefined) updateData.to_area = fields.to_area || null;
       if (fields.status) updateData.status = fields.status;
-      if (fields.createdAt) {
-        const parsedDate = new Date(fields.createdAt);
-        if (!isNaN(parsedDate.getTime())) updateData.createdAt = parsedDate;
-      }
 
       if (Object.keys(updateData).length > 0) {
         await rescue.update(updateData, { transaction });
+      }
+
+      // createdAt is a Sequelize read-only attribute on existing records — instance.update()
+      // silently ignores it, so it must be set with { raw: true } to bypass that guard.
+      if (fields.createdAt) {
+        const parsedDate = new Date(fields.createdAt);
+        if (!isNaN(parsedDate.getTime())) {
+          rescue.set("createdAt", parsedDate, { raw: true });
+          await rescue.save({ transaction });
+        }
       }
 
       // Handle removed media: delete_media_ids is a JSON array of image IDs to remove
